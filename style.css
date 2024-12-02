@@ -231,7 +231,7 @@ section{
 
 .social-media{
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
     width: 220px;
     height: 45px;
 }
