@@ -185,3 +185,38 @@ ScrollReveal().reveal('.about-img,.fillter-buttons,.contact-info', { origin: "le
 ScrollReveal().reveal('.about-content,.skills', { origin: "right" });
 ScrollReveal().reveal('.allServices,.portfolio-gallery,.blog-box,footer,.img-hero', { origin: "bottom" });
 
+document.addEventListener("DOMContentLoaded", function () { 
+    emailjs.init("W-nFmnXLDsBcq5tYd"); // Replace with your EmailJS public key
+
+    document.querySelector("form").addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Collect form data
+        let firstname = document.querySelector('input[placeholder="First Name"]').value;
+        let lastname = document.querySelector('input[placeholder="Last Name"]').value;
+        let email = document.querySelector('input[placeholder="Email"]').value;
+        let subject = document.querySelector('input[placeholder="Subject"]').value;
+        let message = document.querySelector("textarea").value;
+
+        // EmailJS parameters
+        let templateParams = {
+            from_name: firstname + " " + lastname,
+            from_email: email,
+            subject: subject,
+            message: message,
+        };
+
+        // Send email using EmailJS
+        emailjs.send("service_w3bcnun", "template_z6lhf2o", templateParams)
+            .then(function (response) {
+                alert("Message sent successfully!");
+
+                // ✅ Clear input fields after successful submission
+                document.querySelector("form").reset();
+            })
+            .catch(function (error) {
+                alert("Error sending message. Please try again.");
+                console.error("EmailJS error:", error);
+            });
+    });
+});
