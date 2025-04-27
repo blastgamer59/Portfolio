@@ -76,6 +76,16 @@ ul.navlist {
     font-weight: 500;
     transition: all .3s ease;
 }
+.theme-toggle {
+    background: var(--gradient-color-bg);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    transition: all .3s ease;
+    border: none;
+    outline: none;
+}
 .btn:hover, .btn-box .d-CV:hover {
     box-shadow: var(--hover-box-shadow);
 }
@@ -1084,4 +1094,118 @@ h2.counter span {
         width: 100%;
         padding: 13px;
     }
+}
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --gradient-white-bg: linear-gradient(0deg, #2c2c2c 0%, #252525 51%, #1a1a1a 100%);
+    --gradient-white-bg2: linear-gradient(98deg, #252525 0%, #2c2c2c 100%);
+    --font-color: #b0b0b0;
+    --hover-box-shadow: rgba(255,255,255,0.1) 0px 10px 20px, rgba(255,255,255,0.15) 0px 6px 6px;
+}
+
+/* Dark Theme Specific Styles */
+[data-theme="dark"] a {
+    color: #fff;
+}
+
+[data-theme="dark"] .btn {
+    color: #fff;
+}
+
+[data-theme="dark"] .theme-toggle i {
+    color: #fff;
+}
+
+[data-theme="dark"] .hero-info h1,
+[data-theme="dark"] .about-content h3,
+[data-theme="dark"] .timeline-content h4,
+[data-theme="dark"] .servicesItem h3,
+[data-theme="dark"] .portfolio-content h3,
+[data-theme="dark"] .text p
+
+ {
+    color: #fff;
+}
+
+[data-theme="dark"] .menu-icon .bar,
+[data-theme="dark"] .menu-icon::after,
+[data-theme="dark"] .menu-icon::before {
+    background: #fff;
+}
+
+[data-theme="dark"] .btn-box .d-CV {
+    color: #fff;
+    box-shadow: rgba(255,255,255,0.1) 0px 1px 2px 0, rgba(255,255,255,0.15) 0px 2px 6px 2px;
+}
+
+[data-theme="dark"] .social-media a {
+    background: #333;
+}
+
+[data-theme="dark"] .rotate-text span {
+    border: 6px solid #444;
+}
+
+[data-theme="dark"] .rotate-text .text {
+    background: #333;
+    box-shadow: 0 1px 6px 5.94px rgba(255,255,255,0.1);
+}
+
+[data-theme="dark"] .about-btn button,
+[data-theme="dark"] .cvContent a {
+    color: #fff;
+    box-shadow: rgba(255,255,255,0.1) 0px 1px 2px 0, rgba(255,255,255,0.15) 0px 2px 6px 2px;
+}
+
+[data-theme="dark"] .servicesItem {
+    box-shadow: rgba(255,255,255,0.1) 0px 1px 3px 0, rgba(255,255,255,0.06) 0px 1px 2px 0px;
+}
+
+[data-theme="dark"] .icon-services i {
+    box-shadow: rgba(255,255,255,0.1) 0px 1px 3px 0, rgba(255,255,255,0.06) 0px 1px 2px 0px;
+}
+
+[data-theme="dark"] .readMore {
+    color: #fff;
+    box-shadow: rgba(255,255,255,0.1) 0px 1px 3px 0, rgba(255,255,255,0.06) 0px 1px 2px 0px;
+}
+
+[data-theme="dark"] .timeline-content {
+    box-shadow: rgba(255,255,255,0.1) 0px 2px 4px;
+}
+
+[data-theme="dark"] .fillter-buttons button {
+    color: #fff;
+    box-shadow: rgba(255,255,255,0.1) 0px 1px 2px 0, rgba(255,255,255,0.15) 0px 2px 6px 2px;
+}
+
+[data-theme="dark"] .portfolio-box {
+    box-shadow: rgba(255,255,255,0.1) 0px 2px 4px;
+}
+
+[data-theme="dark"] .contact-info,
+[data-theme="dark"] .skills {
+    box-shadow: rgba(255,255,255,0.1) 0px 2px 4px;
+}
+
+[data-theme="dark"] .contact-info form input,
+[data-theme="dark"] .contact-info form textarea {
+    border: 2px solid #444;
+    background: #333;
+    color: #fff;
+}
+
+[data-theme="dark"] form input:focus,
+[data-theme="dark"] form textarea:focus {
+    background: #444;
+    border: 2px solid var(--main-color);
+}
+
+[data-theme="dark"] .outer-circle {
+    box-shadow: rgba(255,255,255,0.1) 0px 6px 12px -2px, rgba(255,255,255,0.15) 0px 3px 7px -3px;
+}
+
+[data-theme="dark"] .inner-circle {
+    box-shadow: rgba(255,255,255,0.1) 3px 3px 6px 0px inset, rgba(255,255,255,0.2) -3px -3px 6px 1px inset;
 }

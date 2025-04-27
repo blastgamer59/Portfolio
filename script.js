@@ -223,3 +223,27 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 });
+// Theme toggle functionality
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
+
+// Check for saved theme preference or default to light
+const savedTheme = localStorage.getItem("theme") || "light";
+body.setAttribute("data-theme", savedTheme);
+updateThemeIcon(savedTheme);
+
+// Toggle theme on button click
+themeToggle.addEventListener("click", () => {
+  const currentTheme = body.getAttribute("data-theme");
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+
+  body.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+  updateThemeIcon(newTheme);
+});
+
+// Update the theme toggle icon (sun/moon)
+function updateThemeIcon(theme) {
+  const icon = themeToggle.querySelector("i");
+  icon.className = theme === "light" ? "bx bx-sun" : "bx bx-moon";
+}
