@@ -1122,10 +1122,15 @@ h2.counter span {
 [data-theme="dark"] .timeline-content h4,
 [data-theme="dark"] .servicesItem h3,
 [data-theme="dark"] .portfolio-content h3,
-[data-theme="dark"] .text p
-
- {
+[data-theme="dark"] .text p,
+[data-theme="dark"] .sk-title
+{
     color: #fff;
+}
+
+[data-theme="dark"] .counter
+{
+    color: #e6006d;
 }
 
 [data-theme="dark"] .menu-icon .bar,
