@@ -180,7 +180,7 @@ section {
 .btn-box {
     display: flex;
     justify-content: space-between;
-    width: 410px;
+    width: 360px;
     margin-top: 2rem;
     margin-bottom: 6rem;
 }
@@ -1080,7 +1080,7 @@ h2.counter span {
         width: 23.8rem;
     }
     .btn-box {
-        width: 335px;
+        width: 290px;
         margin-bottom: 3rem;
     }
     .about-btn button {
