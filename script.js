@@ -15,11 +15,11 @@ class Navigation {
   init() {
     // Hamburger menu toggle
     menuIcon.addEventListener("click", this.toggleMenu.bind(this));
-    
+
     // Close menu when clicking nav links or overlay
     navlist.addEventListener("click", this.closeMenu.bind(this));
     overlay.addEventListener("click", this.closeMenu.bind(this));
-    
+
     // Logo click handler
     logo.addEventListener("click", this.handleLogoClick.bind(this));
   }
@@ -60,14 +60,14 @@ class AboutSection {
   switchContent(index) {
     // Hide all contents
     this.contents.forEach(content => content.style.display = "none");
-    
+
     // Show selected content
     this.contents[index].style.display = "block";
-    
+
     // Update active button
     this.buttons.forEach(btn => btn.classList.remove("active"));
     this.buttons[index].classList.add("active");
-    
+
     // Re-initialize animations
     AnimationManager.initSectionAnimations();
   }
@@ -104,7 +104,11 @@ class SkillsCounter {
     this.skCounters = document.querySelectorAll(".counter span");
     this.progressBars = document.querySelectorAll(".skills svg circle");
     this.skillsPlayed = false;
-    this.init();
+
+    // Only initialize if elements exist
+    if (this.firstSkill || this.skCounters.length > 0 || this.progressBars.length > 0) {
+      this.init();
+    }
   }
 
   init() {
@@ -114,11 +118,17 @@ class SkillsCounter {
   }
 
   hasReached(el) {
+    // Check if element exists before accessing its properties
+    if (!el) return false;
+
     const topPosition = el.getBoundingClientRect().top;
     return window.innerHeight >= topPosition + el.offsetHeight;
   }
 
   updateCount(num, maxNum) {
+    // Check if counter element exists
+    if (!num) return;
+
     let currentNum = +num.innerText;
 
     if (currentNum < maxNum) {
@@ -130,26 +140,45 @@ class SkillsCounter {
   }
 
   skillsCounter() {
-    if (!this.hasReached(this.firstSkill)) return;
-    
+    // Check if we have any skills elements to animate
+    const hasSkillsElements = this.firstSkill || this.skCounters.length > 0;
+
+    if (!hasSkillsElements) {
+      this.skillsPlayed = true;
+      return;
+    }
+
+    // If firstSkill exists, check if we've reached it
+    if (this.firstSkill && !this.hasReached(this.firstSkill)) return;
+
     this.skillsPlayed = true;
-    
-    this.skCounters.forEach((counter, i) => {
-      const target = +counter.dataset.target;
-      const strokeValue = 465 - 465 * (target / 100);
 
-      this.progressBars[i].style.setProperty("--target", strokeValue);
+    // Only process counters if they exist
+    if (this.skCounters.length > 0) {
+      this.skCounters.forEach((counter, i) => {
+        const target = +counter.dataset.target;
+        const strokeValue = 465 - 465 * (target / 100);
 
-      setTimeout(() => {
-        this.updateCount(counter, target);
-      }, 400);
-    });
+        // Only process progress bars if they exist
+        if (this.progressBars[i]) {
+          this.progressBars[i].style.setProperty("--target", strokeValue);
+        }
 
-    this.progressBars.forEach(
-      p => (p.style.animation = "progress 2s ease-in-out forwards")
-    );
+        setTimeout(() => {
+          this.updateCount(counter, target);
+        }, 400);
+      });
+    }
+
+    // Only animate progress bars if they exist
+    if (this.progressBars.length > 0) {
+      this.progressBars.forEach(
+        p => (p.style.animation = "progress 2s ease-in-out forwards")
+      );
+    }
   }
 }
+
 
 // ==================== Scroll Progress ============================
 class ScrollProgress {
@@ -161,7 +190,7 @@ class ScrollProgress {
   init() {
     window.onscroll = this.calcScrollValue.bind(this);
     window.onload = this.calcScrollValue.bind(this);
-    
+
     this.scrollProgress.addEventListener("click", () => {
       document.documentElement.scrollTop = 0;
     });
@@ -169,8 +198,8 @@ class ScrollProgress {
 
   calcScrollValue() {
     const pos = document.documentElement.scrollTop;
-    const calcHeight = document.documentElement.scrollHeight - 
-                      document.documentElement.clientHeight;
+    const calcHeight = document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
     const scrollValue = Math.round((pos * 100) / calcHeight);
 
     if (pos > 100) {
@@ -179,7 +208,7 @@ class ScrollProgress {
       this.scrollProgress.style.display = "none";
     }
 
-    this.scrollProgress.style.background = 
+    this.scrollProgress.style.background =
       `conic-gradient(#fff ${scrollValue}%,#0d9488 ${scrollValue}%)`;
   }
 }
@@ -199,10 +228,10 @@ class ActiveMenu {
 
   activeMenu() {
     let len = this.sections.length;
-    while (--len && window.scrollY + 97 < this.sections[len].offsetTop) {}
-    
+    while (--len && window.scrollY + 97 < this.sections[len].offsetTop) { }
+
     this.menuLi.forEach(sec => sec.classList.remove("active"));
-    
+
     if (this.menuLi[len]) {
       this.menuLi[len].classList.add("active");
     }
@@ -250,7 +279,7 @@ class ContactForm {
     // Initialize EmailJS
     emailjs.init("W-nFmnXLDsBcq5tYd");
 
-   
+
     document.querySelector("form").addEventListener("submit", (event) => {
       event.preventDefault();
       this.handleSubmit(event);
@@ -259,14 +288,14 @@ class ContactForm {
 
   handleSubmit(event) {
     const formData = this.collectFormData();
-    
+
     if (this.validateForm(formData)) {
       this.sendEmail(formData);
     }
   }
 
   collectFormData() {
-    
+
     return {
       firstname: document.querySelector('input[placeholder="First Name"]').value,
       lastname: document.querySelector('input[placeholder="Last Name"]').value,
@@ -282,12 +311,12 @@ class ContactForm {
       alert("Please fill in all required fields.");
       return false;
     }
-    
+
     if (!this.isValidEmail(data.email)) {
       alert("Please enter a valid email address.");
       return false;
     }
-    
+
     return true;
   }
 
@@ -304,7 +333,7 @@ class ContactForm {
       message: data.message,
     };
 
-   
+
     emailjs
       .send("service_i7dq7h3", "template_f8f14dj", templateParams)
       .then(() => {
@@ -327,7 +356,7 @@ class AnimationManager {
   }
 
   static initScrollToHome() {
-    window.addEventListener("load", function() {
+    window.addEventListener("load", function () {
       if (sessionStorage.getItem("scrollToHome")) {
         sessionStorage.removeItem("scrollToHome");
         const homeSection = document.getElementById("home");
@@ -373,7 +402,7 @@ class AnimationManager {
 
     elements.forEach(element => {
       const elementTop = element.getBoundingClientRect().top;
-      
+
       if (elementTop < triggerBottom) {
         element.classList.add('animate-in');
       }
@@ -442,7 +471,7 @@ class App {
     new ThemeToggle();
     new ContactForm();
     new SwiperInit();
-    
+
     // Initialize animations
     AnimationManager.init();
 
